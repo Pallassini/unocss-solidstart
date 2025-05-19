@@ -1,0 +1,26 @@
+name: Create Repository Visualization
+
+on:
+  push:
+    branches:
+      - main  # Sostituisci con il tuo branch principale (main, master, ecc.)
+  workflow_dispatch: # Permette di eseguire manualmente l'action
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Generate Repository Visualization
+        uses: githubocto/repo-visualizer@main
+        with:
+          output_file: "diagram.svg"
+          excluded_paths: "node_modules,dist,.github"  # Personalizza con le cartelle da escludere
+          commit_message: "Aggiornamento automatico del diagramma del repository"
+          branch: main  # Sostituisci con il tuo branch principale
+          root_path: "/"  # Percorso radice del repository
