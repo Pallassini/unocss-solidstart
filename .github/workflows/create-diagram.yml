@@ -6,6 +6,10 @@ on:
       - main  # o il tuo branch principale
   workflow_dispatch:
 
+# Aggiungi questa sezione
+permissions:
+  contents: write  # Questo è fondamentale per permettere la scrittura nel repository
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,9 +17,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          persist-credentials: true  # Cambiato da false a true
+          persist-credentials: true
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}  # Aggiungi questo
 
       - name: Generate Repository Visualization
         uses: githubocto/repo-visualizer@main
